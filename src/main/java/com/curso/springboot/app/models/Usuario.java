@@ -1,5 +1,6 @@
 package com.curso.springboot.app.models;
 
+
 public class Usuario {
 
     private Long id;

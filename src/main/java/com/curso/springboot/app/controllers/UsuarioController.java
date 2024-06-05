@@ -1,18 +1,23 @@
 package com.curso.springboot.app.controllers;
 
+import com.curso.springboot.app.dao.usuarioDao;
 import com.curso.springboot.app.models.Usuario;
+import com.curso.springboot.app.models.Response;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class UsuarioController {
 
     @RequestMapping(value = "usuario/{id}")
-    public Usuario getUsuario(@PathVariable Long id) {
+    public ResponseEntity<Map<String, Object>> getUsuario(@PathVariable Long id) {
         Usuario usuario = new Usuario();
         usuario.setId(id);
         usuario.setNombre("Deiby");
@@ -20,11 +25,12 @@ public class UsuarioController {
         usuario.setEmail("deibhyarroyave@gmail.com");
         usuario.setTelefono("3011580102");
 
-        return usuario;
+        Response response = new Response(200, "Success", usuario);
+        return new ResponseEntity<>(response.getResponse(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "usuarios")
-    public List<Usuario> getUsuario() {
+    public ResponseEntity<Map<String, Object>> getUsuarios(@PathVariable Long id) {
         List<Usuario> usuarios = new ArrayList<>();
         Usuario usuario = new Usuario();
         usuario.setId(1L);
@@ -58,7 +64,10 @@ public class UsuarioController {
         usuarios.add(usuario2);
         usuarios.add(usuario3);
         usuarios.add(usuario4);
-        return usuarios;
+
+        Response j = new Response(200, "Success", usuarios);
+        return new ResponseEntity<>(j.getResponse(), HttpStatus.OK);
+
     }
 
     @RequestMapping(value = "usuario123")
@@ -93,4 +102,5 @@ public class UsuarioController {
 
         return usuario;
     }
+
 }
