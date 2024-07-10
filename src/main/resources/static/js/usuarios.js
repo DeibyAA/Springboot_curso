@@ -31,6 +31,12 @@ async function cargarUsuarios() {
       document.querySelector('#usuarios tbody').outerHTML = listadoHtml;
 }
 
-function eliminarUsuario(id) {
-    alert(id);
+async function eliminarUsuario(id) {
+    const request = await fetch('api/usuarios/' + id, {
+        method: 'DELETE',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
 }
