@@ -1,7 +1,8 @@
 // Call the dataTables jQuery plugin
 $(document).ready(function() {
-  cargarUsuarios();
+    cargarUsuarios();
   $('#usuarios').DataTable();
+  actualizarEmailDelUsuario();
 });
 
 async function cargarUsuarios() {
@@ -32,6 +33,11 @@ async function cargarUsuarios() {
 }
 
 async function eliminarUsuario(id) {
+
+    if(confirm('¿Desea eliminar este usuario?')) {
+        return;
+    }
+
     const request = await fetch('api/usuarios/' + id, {
         method: 'DELETE',
         headers: {
@@ -39,4 +45,6 @@ async function eliminarUsuario(id) {
           'Content-Type': 'application/json'
         }
       });
+
+      location.reload()
 }
